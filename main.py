@@ -1,9 +1,6 @@
 import tkinter as tk
 import tkinter.messagebox as messagebox
 import mysql.connector
-from database import Database
-
-db = Database("boutique.db")
 
 cnx = mysql.connector.connect(user='root', password='6666',
                               host='localhost',
@@ -104,6 +101,17 @@ def modifier_produit(produit):
         )
         db.modifier_produit(produit_nouveau)
         fenetre_saisie.destroy()
+
+    def enregistrer():
+        nom = nom_entry.get()
+        description = description_entry.get()
+        prix = float(prix_entry.get())
+        quantite = int(quantite_entry.get())
+        categorie = categorie_entry.get()
+
+    db.modifier_produit(nom, description, prix, quantite, categorie)
+    
+    fenetre_saisie.destroy()
 
     enregistrer_button = tk.Button(fenetre_saisie, text="Enregistrer", command=enregistrer)
     enregistrer_button.grid(row=5, column=1)
