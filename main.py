@@ -69,6 +69,9 @@ text_box.pack()
 for produit in produits:
     text_box.insert(tk.END, f"{produit[1]} - {produit[2]} - {produit[3]} - {produit[4]}\n")
 
+ajouter_button = tk.Button(root, text="Ajouter un produit", command=ajouter_produit)
+ajouter_button.pack()
+
 cursor.close()
 cnx.close()
 
