@@ -126,6 +126,9 @@ for produit in produits:
 ajouter_button = tk.Button(root, text="Ajouter un produit", command=ajouter_produit)
 ajouter_button.pack()
 
+modifier_button = tk.Button(root, text="Modifier un produit", command=modifier_produit)
+modifier_button.pack()
+
 cursor.close()
 cnx.close()
 
