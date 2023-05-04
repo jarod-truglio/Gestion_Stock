@@ -36,6 +36,40 @@ def ajouter_produit():
     categorie_entry = tk.Entry(fenetre_saisie)
     categorie_entry.grid(row=4, column=1)
 
+def modifier_produit(produit):
+    fenetre_saisie = tk.Toplevel(root)
+    fenetre_saisie.title("Modifier le produit")
+
+    nom_label = tk.Label(fenetre_saisie, text="Nom")
+    nom_label.grid(row=0, column=0)
+    nom_entry = tk.Entry(fenetre_saisie)
+    nom_entry.grid(row=0, column=1)
+    nom_entry.insert(0, produit[1])
+
+    description_label = tk.Label(fenetre_saisie, text="Description")
+    description_label.grid(row=1, column=0)
+    description_entry = tk.Entry(fenetre_saisie)
+    description_entry.grid(row=1, column=1)
+    description_entry.insert(0, produit[2])
+
+    prix_label = tk.Label(fenetre_saisie, text="Prix")
+    prix_label.grid(row=2, column=0)
+    prix_entry = tk.Entry(fenetre_saisie)
+    prix_entry.grid(row=2, column=1)
+    prix_entry.insert(0, produit[3])
+
+    quantite_label = tk.Label(fenetre_saisie, text="Quantité")
+    quantite_label.grid(row=3, column=0)
+    quantite_entry = tk.Entry(fenetre_saisie)
+    quantite_entry.grid(row=3, column=1)
+    quantite_entry.insert(0, produit[4])
+
+    categorie_label = tk.Label(fenetre_saisie, text="Catégorie")
+    categorie_label.grid(row=4, column=0)
+    categorie_entry = tk.Entry(fenetre_saisie)
+    categorie_entry.grid(row=4, column=1)
+    categorie_entry.insert(0, produit[5])
+
     def valider():
         nom = nom_entry.get()
         description = description_entry.get()
