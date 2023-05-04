@@ -1,6 +1,9 @@
 import tkinter as tk
 import tkinter.messagebox as messagebox
 import mysql.connector
+from database import Database
+
+db = Database("boutique.db")
 
 cnx = mysql.connector.connect(user='root', password='6666',
                               host='localhost',
@@ -87,28 +90,23 @@ def modifier_produit(produit):
         fenetre_saisie.destroy()
         messagebox.showinfo("Produit ajouté", "Le produit a été ajouté à la base de données.")
 
-    def valider_modif():
-        nom = nom_entry.get()
-        description = description_entry.get()
-        prix = float(prix_entry.get())
-        quantite = int(quantite_entry.get())
-        categorie = categorie_entry.get()
-
-        query = ("UPDATE produit "
-                 "SET nom = %s, description = %s, prix = %s, quantite = %s, categorie = %s "
-                 "WHERE id = %s")
-        values = (nom, description, prix, quantite, categorie, produit[0])
-        cursor.execute(query, values)
-        cnx.commit()
-
-        fenetre_saisie.destroy()
-        messagebox.showinfo("Produit modifié", "Le produit a été modifié dans la base de données.")
-
     valider_button = tk.Button(fenetre_saisie, text="Valider", command=valider)
     valider_button.grid(row=5, column=0, columnspan=2)
 
-    valider_button = tk.Button(fenetre_saisie, text="Valider", command=valider_modif)
-    valider_button.grid(row=5, column=0, columnspan=2)
+    def enregistrer():
+        produit_nouveau = (
+            produit[0],
+            nom_entry.get(),
+            description_entry.get(),
+            float(prix_entry.get()),
+            int(quantite_entry.get()),
+            categorie_entry.get(),
+        )
+        db.modifier_produit(produit_nouveau)
+        fenetre_saisie.destroy()
+
+    enregistrer_button = tk.Button(fenetre_saisie, text="Enregistrer", command=enregistrer)
+    enregistrer_button.grid(row=5, column=1)
 
 query = "SELECT * FROM produit"
 cursor.execute(query)
